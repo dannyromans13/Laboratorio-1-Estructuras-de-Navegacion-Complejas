@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function ListScreen({ navigation }) {
   return (
@@ -33,6 +34,8 @@ const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
+const Drawer = createDrawerNavigator();
+
 function ProductsStack() {
   return (
     <Stack.Navigator>
@@ -45,11 +48,19 @@ function ProductsStack() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Productos" component={ProductsStack} />
-        <Tab.Screen name="Favoritos" component={FavoritesScreen} />
-      </Tab.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Inicio" component={HomeTabs} />
+      </Drawer.Navigator>
     </NavigationContainer>
+  );
+}
+
+function HomeTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Productos" component={ProductsStack} />
+      <Tab.Screen name="Favoritos" component={FavoritesScreen} />
+    </Tab.Navigator>
   );
 }
 
